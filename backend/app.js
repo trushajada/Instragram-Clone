@@ -33,7 +33,9 @@ const app =express();
 const port =5000;
 const mongoose =require("mongoose");
 const mongoUrl =require("./key");
+
 mongoose.connect(mongoUrl);
+require('./models/model');
 
 mongoose.connection.on("connected",()=>{
     console.log("successfully coonect in mogooes");
