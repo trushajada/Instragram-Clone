@@ -7,18 +7,15 @@ import { Await, Link } from "react-router-dom";
 const SingUp = () => {
 
   const fetchdata = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/'); 
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(data)
-    } catch (error) {
-      console.error("Error fetching data:", error); 
-    }
+    const response = await fetch('http://localhost:5000/'); 
+    const data =await response.json();
+    console.log(data);
+    
   };
 
+  useEffect(()=>{
+    fetchdata()
+  },[])
     return (
         <>
             <div className="signup py-4 px-4  min-h-screen flex items-center justify-center "> 
