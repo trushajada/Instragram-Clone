@@ -1,7 +1,8 @@
 const express =require('express');
 const router =express.Router();
 const mongoose =require("mongoose");
-const USER =mongoose.model("USER")
+const USER =mongoose.model("USER");
+const bcrypt =require("bcrypt")
 router.get('/',(req,res)=>{
 res.send("hello");
 })
@@ -15,16 +16,19 @@ router.post("/SingUp",(req,res)=>{
         if(savedUser){
             return res.status(422).json({error:"user exited success email or username"})
         }
-        const user =new USER({
-            name,
-            email,
-            username,
-            password,
+        bcrypt.hash(password,12).then((hashedPassword)=>{
+            const user =new USER({
+                name,
+                email,
+                username,
+                password:hashedPassword
+            })
+        
+            user.save()
+            .then(user=>{res.json({message:"saved successfully"})})
+            .catch(err=>{console.log(err )})
         })
-    
-        user.save()
-        .then(user=>{res.json({message:"saved successfully"})})
-        .catch(err=>{console.log(err )})
+        
     
     })
    
