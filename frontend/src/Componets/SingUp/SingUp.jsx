@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import React from "react";
 import Logo from '../../assets/images/Logo.png';
 import { Await, Link } from "react-router-dom";
@@ -6,16 +6,12 @@ import { Await, Link } from "react-router-dom";
 
 const SingUp = () => {
 
-  const fetchdata = async () => {
-    const response = await fetch('http://localhost:5000/'); 
-    const data =await response.json();
-    console.log(data);
-    
-  };
+  const [name ,setname]=useState('');
+  const [username ,setusername]=useState('');
+  const [password ,setpassword]=useState('');
+  const [email ,setemail]=useState('');
 
-  useEffect(()=>{
-    fetchdata()
-  },[])
+  
     return (
         <>
             <div className="signup py-4 px-4  min-h-screen flex items-center justify-center "> 
