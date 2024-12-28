@@ -31,9 +31,17 @@
 const express = require('express');
 const app =express();
 const port =5000;
-const mongoose =require("mongoose")
+const mongoose =require("mongoose");
+const mongoUrl =require("./key");
+mongoose.connect(mongoUrl);
 
-mongoose.connect("mongodb+srv://trushajada:<db_password>@cluster0.lx4uk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connection.on("connected",()=>{
+    console.log("successfully coonect in mogooes");
+});
+
+mongoose.connection.on("error",()=>{
+    console.log("not successfully  in error mogooes");
+});
 
 app.listen(port,()=>{
     console.log("server running port " ,+ port);
