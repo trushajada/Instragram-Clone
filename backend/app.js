@@ -36,6 +36,8 @@ const mongoUrl =require("./key");
 
 mongoose.connect(mongoUrl);
 require('./models/model');
+app.use(express.json())
+app.use(require('./routes/auth'));
 
 mongoose.connection.on("connected",()=>{
     console.log("successfully coonect in mogooes");
