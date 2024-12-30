@@ -12,8 +12,20 @@ const SingUp = () => {
   const [email, setemail] = useState('');
   const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
+  // var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  // if(!emailRegex.test(email)){
+  //   notifyA("Invitad on merrage")
+  //   return
+  // } 
 
   const postdata = () => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(!emailRegex.test(email)){
+      notifyA("Invalid email address");
+      return;
+    }
+    
     fetch("http://localhost:5000/Singup", {
       method: 'POST',
       headers: {
@@ -27,16 +39,16 @@ const SingUp = () => {
       }),
     })
       .then(res => res.json())
-      .then(data => {
+      .then((data) => {
         if (data.error) {
           notifyA(data.error)
         }
         else {
-          notifyB(data.message)
+          notifyB(data.message);
           navigate('/SingIn')
         }
-        console.log(data)
       })
+      .catch((err)=>notifyA("Please try again"))
   }
   return (
     <>
@@ -53,8 +65,6 @@ const SingUp = () => {
               <div>
                 <input
                   type="email"
-                  name="email"
-                  id="email"
                   placeholder="Email..."
                   className="border w-full p-2 mb-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                   required
@@ -65,8 +75,6 @@ const SingUp = () => {
               <div>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
                   placeholder="Full Name..."
                   className="border w-full p-2 mb-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                   required
@@ -77,8 +85,6 @@ const SingUp = () => {
               <div>
                 <input
                   type="text"
-                  name="user"
-                  id="user"
                   placeholder="User Name..."
                   className="border w-full p-2 mb-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                   required
@@ -89,8 +95,6 @@ const SingUp = () => {
               <div>
                 <input
                   type="password"
-                  name="password"
-                  id="password"
                   placeholder="Password..."
                   className="border w-full p-2 mb-3 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                   onChange={(e) => { setpassword(e.target.value) }}
