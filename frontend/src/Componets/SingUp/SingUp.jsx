@@ -39,7 +39,7 @@ const SingUp = () => {
         }
         else {
           notifyB(data.message);
-          navigate('/SingIn')
+          navigate('/SingIn');
         }
       })
       .catch((err)=>notifyA("Please try again"))
@@ -98,7 +98,7 @@ const SingUp = () => {
                 By Signing up, You agree to our terms, <br />
                 Privacy and policy
               </p>
-              <button
+              <button to="/SingIn"
                 type="submit"
                 className="border-2 p-2 text-white rounded-lg w-full bg-blue-600 mt-5 font-semibold hover:bg-blue-700 transition duration-300" onClick={postdata}
               >

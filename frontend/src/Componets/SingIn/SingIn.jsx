@@ -33,6 +33,7 @@ const SingIn=()=>{
               />
             </div>
             <button
+            to="/navbar"
               type="submit"
               className="border-2 p-2 text-white rounded-lg w-full bg-blue-600 mt-5 font-semibold hover:bg-blue-700 transition duration-300" 
             >

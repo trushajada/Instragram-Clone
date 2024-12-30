@@ -10,8 +10,8 @@ function App() {
     <BrowserRouter>
     <Navbar/>
         <Routes>
-           <Route path="/SingUp" element={<SingUp />} />
-          <Route path="/SingIn" element={<SingIn />} />
+           <Route path="/SingUp" element={<SingUp/>} />
+          <Route path="/SingIn" element={<SingIn/>} />
         </Routes>
     <ToastContainer theme='dark'/>
     </BrowserRouter>
