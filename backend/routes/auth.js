@@ -12,7 +12,7 @@ router.post("/SingUp",(req,res)=>{
     if(!username || !name|| !password|| !email){
        return res.status(422).json({error:"please add filed"});
     };
-    USER.findOne({$or:[{email:email},{username:username}]}).then((savedUser)=>{
+USER.findOne({$or:[{email:email},{username:username}]}).then((savedUser)=>{
         if(savedUser){
             return res.status(422).json({error:"user exited success email or username"})
         }
@@ -29,6 +29,20 @@ router.post("/SingUp",(req,res)=>{
             .catch(err=>{console.log(err )})
         })
     })
+})
+router.post("/SingIn",(req ,res)=>{
+    const{email, password}=req.body;
+    if(!password|| !email){
+        return res.status(422).json({error:"please add filed"});
+     };
+})
+
+USER.findOne({email:email}).then((savedUser)=>{
+    if(!savedUser){
+        return res.status(422).json({error:"Invailed email"})
+    }
+    console.log(savedUser);
+    
 })
 
 module.exports =router;

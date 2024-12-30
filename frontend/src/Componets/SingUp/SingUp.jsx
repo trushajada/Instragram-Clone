@@ -5,7 +5,7 @@ import { Await, Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 const SingUp = () => {
-  const navigate =useNavigate()
+  const navigate = useNavigate()
   const [name, setname] = useState('');
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
@@ -18,14 +18,14 @@ const SingUp = () => {
     if(!emailRegex.test(email)){
       notifyA("Invalid email address");
       return;
-    }
+    } 
     
     fetch("http://localhost:5000/SingUp", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      body:JSON.stringify({
         email: email,
         name: name,
         username: username,
@@ -42,7 +42,7 @@ const SingUp = () => {
           navigate('/SingIn');
         }
       })
-      .catch((err)=>notifyA("Please try again"))
+      .catch((err)=>notifyA("Please try again"));
   }
   return (
     <>
