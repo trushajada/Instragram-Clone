@@ -7,10 +7,10 @@ router.get('/',(req,res)=>{
 res.send("hello");
 })
 
-router.post("/SingUp",(req,res)=>{
+router.post("/Singup",(req,res)=>{
     const{name,username,email ,password}=req.body;    
     if(!username || !name|| !password|| !email){
-        res.status(422).json({error:"please add filed"});
+       return res.status(422).json({error:"please add filed"});
     };
     USER.findOne({$or:[{email:email},{username:username}]}).then((savedUser)=>{
         if(savedUser){
@@ -25,15 +25,10 @@ router.post("/SingUp",(req,res)=>{
             })
         
             user.save()
-            .then(user=>{res.json({message:"saved successfully"})})
+            .then(user=>{res.json({message:"Register saved successfully"})})
             .catch(err=>{console.log(err )})
         })
-        
-    
     })
-   
-    
-  
 })
 
 module.exports =router;

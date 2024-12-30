@@ -3,6 +3,8 @@ import Navbar from './Componets/Navbar/Navbar';
 import SingIn from './Componets/SingIn/SingIn';
 import SingUp from './Componets/SingUp/SingUp';
 import './App.css'
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <BrowserRouter>
@@ -11,7 +13,7 @@ function App() {
           <Route path="/SingIn" element={<SingIn />} />
           <Route path="/SingUp" element={<SingUp />} />
         </Routes>
-    
+    <ToastContainer theme='dark'/>
     </BrowserRouter>
   );
 }
