@@ -7,7 +7,7 @@ router.get('/',(req,res)=>{
 res.send("hello");
 })
 
-router.post("/Singup",(req,res)=>{
+router.post("/SingUp",(req,res)=>{
     const{name,username,email ,password}=req.body;    
     if(!username || !name|| !password|| !email){
        return res.status(422).json({error:"please add filed"});

@@ -12,12 +12,6 @@ const SingUp = () => {
   const [email, setemail] = useState('');
   const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
-  // var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-  // if(!emailRegex.test(email)){
-  //   notifyA("Invitad on merrage")
-  //   return
-  // } 
 
   const postdata = () => {
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -26,7 +20,7 @@ const SingUp = () => {
       return;
     }
     
-    fetch("http://localhost:5000/Singup", {
+    fetch("http://localhost:5000/SingUp", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +100,7 @@ const SingUp = () => {
               </p>
               <button
                 type="submit"
-                className="border-2 p-2 text-white rounded-lg w-full bg-blue-600 mt-5 font-semibold hover:bg-blue-700 transition duration-300" onClick={() => { postdata() }}
+                className="border-2 p-2 text-white rounded-lg w-full bg-blue-600 mt-5 font-semibold hover:bg-blue-700 transition duration-300" onClick={postdata}
               >
                 Sign up
               </button>
