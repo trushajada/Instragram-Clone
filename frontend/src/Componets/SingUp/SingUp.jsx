@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import React from "react";
-import Logo from '../../assets/images/Logo.png'; 
+import Logo from '../../assets/images/Logo.png';
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const SingUp = () => {
     const navigate = useNavigate();
@@ -15,12 +15,17 @@ const SingUp = () => {
     const notifyA = (msg) => toast.error(msg);
     const notifyB = (msg) => toast.success(msg);
 
-    const postdata = async () => { 
-        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
+    const postdata = async () => {
         if (!emailRegex.test(email)) {
             notifyA("Invalid email address");
             return;
-        }
+        }else if (!passwordRegex.test(password)) {
+            notifyA("passord must contain at leatest 8 charecter.. including at 1 number and including in 1  both lower and uppercase letter and special character for example @ , #, !")
+            return;
+          }
 
         try {
             const res = await fetch("http://localhost:5000/SingUp", {
@@ -42,11 +47,11 @@ const SingUp = () => {
                 notifyA(data.error);
             } else {
                 notifyB(data.message);
-                navigate('/SingIn'); 
+                navigate('/SingIn');
             }
         } catch (error) {
-            console.error("Fetch error:", error); 
-            notifyA("Please try again later"); 
+            console.error("Fetch error:", error);
+            notifyA("Please try again later");
         }
     };
 

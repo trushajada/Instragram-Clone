@@ -52,29 +52,45 @@ router.post("/SingIn", (req, res) => {
         return res.status(422).json({ error: "Please provide email and password" }); 
     }
 
-    USER.findOne({ email: email })
-        .then((savedUser) => {
-            if (!savedUser) {
-                return res.status(404).json({ error: "Invalid email or password" }); 
+    // USER.findOne({ email: email })
+    //     .then((savedUser) => {
+    //         if (!savedUser) {
+    //             return res.status(404).json({ error: "Invalid email or password" }); 
+    //         }
+
+    //         bcrypt.compare(password, savedUser.password) 
+    //             .then(doMatch => {
+    //                 if (!doMatch) {
+    //                     return res.status(401).json({ error: "Invalid email or password" }); 
+    //                 }
+    //                 res.json({ message: "Login successful" });
+    //             })
+    //             .catch(err => {
+    //                 console.error(err);
+    //                 res.status(500).json({ error: "Error comparing passwords" }); 
+    //             });
+
+    //     })
+    //     .catch(err => {
+    //         console.error(err);
+    //         res.status(500).json({ error: "Error finding user" }); 
+    //     });
+
+    USER.findOne({email:email}).then((savedUser)=>{
+        if(!savedUser){
+            return res.status(422).json({ error: "Invalid email" });  
+        }
+        bcrypt.compare(password,savedUser.password).then((match)=>{
+            if(match){
+                return res.status(200).json({message:"signed in successfully"})
             }
-
-            bcrypt.compare(password, savedUser.password) 
-                .then(doMatch => {
-                    if (!doMatch) {
-                        return res.status(401).json({ error: "Invalid email or password" }); 
-                    }
-                    res.json({ message: "Login successful" });
-                })
-                .catch(err => {
-                    console.error(err);
-                    res.status(500).json({ error: "Error comparing passwords" }); 
-                });
-
+            else{
+                return res.status(422).json({error:"Invalid password"})
+            }
         })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ error: "Error finding user" }); 
-        });
+        .catch(err=>console.log(err));
+            
+    })
 });
 
 module.exports = router;
