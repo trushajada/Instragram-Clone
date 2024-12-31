@@ -28,7 +28,7 @@ const Home = () => {
                         <div className="card-comment flex mt-3 border">
                             <span><FiSmile className="text-xl mt-2 w-10"/></span>
                             <input type="text" placeholder="Add a comment" className=" mx-auto flex w-full"/>
-                            <button className="commit  p-1 mx-auto flex w-10 text-blue-500 font-semibold outline-none"><p className="text-center"> Post</p></button>
+                            <button className="commit  p-1 mx-auto flex w-10 text-blue-400 font-semibold outline-none"><p className="text-center"> Post</p></button>
                         </div>
                     </div>
                 </div>
