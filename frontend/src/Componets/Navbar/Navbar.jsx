@@ -17,6 +17,9 @@ const Navbar = () => {
                             <li>
                                 <a href="Profile" className=" font-semibold">Profile</a>
                             </li>
+                            <li>
+                                <a href="Createpost" className=" font-semibold">Create post</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>

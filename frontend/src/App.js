@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Home from './Componets/Home/Home';
 import Profile from './Componets/Profile/Profile';
+import Createpost from './Componets/Createpost/Createpost';
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
             <Route path='/Profile' element={<Profile/>}></Route>
            <Route path="/SingUp" element={<SingUp/>} />
           <Route path="/SingIn" element={<SingIn/>} />
+          <Route path="/Createpost" element={<Createpost/>} />
         </Routes>
     <ToastContainer theme='dark'/>
     </BrowserRouter>
