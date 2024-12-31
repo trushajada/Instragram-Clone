@@ -2,6 +2,14 @@ import React from "react";
 import homeimg from "../../assets/images/homeimg.jpg";
 
 const Createpost = () => {
+    
+    var loadFile = function(e) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(e.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) 
+        }
+      };
     return (
         <>
             <div className="createpost px-3">
@@ -12,7 +20,8 @@ const Createpost = () => {
                             <button className="bg-gray-100 w-12 text-blue-400 font-semibold mb-3 me-1">Share</button>
                         </div>
                         <div className="main-div p-3 border-b-2">
-                            <input type="file" accept="image/*" />
+                        <img  id="output" className="w-2/3 mx-auto" />
+                            <input type="file" accept="image/*"  onChange={(e)=>{loadFile(e)}}/>
                         </div>
                         <div className="detail flex items-center">
                             <div className="card-header p-3">
