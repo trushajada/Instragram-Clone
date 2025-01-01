@@ -1,8 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import homeimg from "../../assets/images/homeimg.jpg";
 
 const Createpost = () => {
     
+    const [body , setbody]=useState("");
+    const [image , setImage]=useState("")
+
+    const postDetail =()=>{
+        console.log(body ,image);
+        
+    }
+
     var loadFile = function(e) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(e.target.files[0]);
@@ -17,11 +25,11 @@ const Createpost = () => {
                     <div className="post border justify-center items-center py-4  max-w-lg mx-auto mt-5">
                         <div className="post-header flex border-b-2 ">
                             <h3 className="text-center font-semibold text-xl mx-auto mb-3">Create New Post</h3>
-                            <button className="bg-gray-100 w-12 text-blue-400 font-semibold mb-3 me-1">Share</button>
+                            <button className="bg-gray-100 w-12 text-blue-400 font-semibold mb-3 me-1" onClick={()=>{postDetail()}}>Share</button>
                         </div>
                         <div className="main-div p-3 border-b-2">
                         <img  id="output" className="w-2/3 mx-auto" />
-                            <input type="file" accept="image/*"  onChange={(e)=>{loadFile(e)}}/>
+                            <input type="file" accept="image/*"  onChange={(e)=>{loadFile(e),setImage(e.target.value[0])}}/>
                         </div>
                         <div className="detail flex items-center">
                             <div className="card-header p-3">
@@ -30,7 +38,7 @@ const Createpost = () => {
                             <h5>Trusha-Jada</h5>
                         </div>
                         <div className="p-3">
-                        <textarea name="" id="" placeholder="Write Caption" className="border w-full h-[100px]"></textarea>
+                        <textarea value={body} onChange={(e)=>{setbody(e.target.value)}} name="" id="" placeholder="Write Caption" className="border w-full h-[100px]"></textarea>
                         </div>
                         
                     </div>
