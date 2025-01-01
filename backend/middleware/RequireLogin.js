@@ -18,9 +18,8 @@ const USER = mongoose.model("USER")
 
         const {_id}=payload
         USER.findById(_id).then(userData=>{
-            console.log(userData);
-            
+            req.user = userData
+            next()
         })
     })
-    next()
 }
