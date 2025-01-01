@@ -4,24 +4,28 @@ const mongoose = require("mongoose");
 const USER = mongoose.model("USER");
 const bcrypt = require("bcrypt");
 const jwt =require("jsonwebtoken");
-const { Jwt_secrest } = require('../key');
+const { Jwt_secret } = require('../key');
 const RequireLogin = require('../middleware/RequireLogin');
 
 router.get('/', (req, res) => {
     res.send("hello");
 });
 
-router.get('/Createpost',RequireLogin,(req , res)=>{})
+router.get("/Createpost" , RequireLogin,(req,res)=>{
+    console.log("hello auth");
+    
+})
+
 router.post("/SingUp", (req, res) => {
     const { name, username, email, password } = req.body;
     if (!username || !name || !password || !email) {
-        return res.status(422).json({ error: "Please add all fields" }); // Improved message
+        return res.status(422).json({ error: "Please add all fields" }); 
     }
 
     USER.findOne({ $or: [{ email: email }, { username: username }] })
         .then((savedUser) => {
             if (savedUser) {
-                return res.status(422).json({ error: "User already exists with this email or username" }); // Improved message
+                return res.status(422).json({ error: "User already exists with this email or username" }); 
             }
             bcrypt.hash(password, 12)
                 .then((hashedPassword) => {
@@ -62,10 +66,9 @@ router.post("/SingIn", (req, res) => {
         }
         bcrypt.compare(password,savedUser.password).then((match)=>{
             if(match){
-                // return res.status(200).json({message:"signed in successfully"})
-                const token =jwt.sign({_id:savedUser.id},Jwt_secrest)
-                res.json(token)
-                console.log(tokenres.json(token));
+                const token =jwt.sign({_id:savedUser.id},Jwt_secret);
+                res.send(token)
+                console.log(token);
             }
             else{
                 return res.status(422).json({error:"Invalid password"})

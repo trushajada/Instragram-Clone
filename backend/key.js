@@ -2,6 +2,6 @@ const mongoUrl ="mongodb+srv://trushajada:RpQQdRxtvfguqZW5@cluster0.lx4uk.mongod
 
 module.exports={
     mongoUrl: "mongodb+srv://trushajada:RpQQdRxtvfguqZW5@cluster0.lx4uk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-    Jwt_secrest:"faslkfocvnerou",
+    Jwt_secret:"faslkfocvnerou",
 
 }

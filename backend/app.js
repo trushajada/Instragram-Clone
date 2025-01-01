@@ -36,7 +36,6 @@ const {mongoUrl} =require("./key");
 const cors =require("cors");
 
 app.use(cors())
-
 mongoose.connect(mongoUrl);
 require('./models/model');
 app.use(express.json())
