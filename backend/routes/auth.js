@@ -5,11 +5,13 @@ const USER = mongoose.model("USER");
 const bcrypt = require("bcrypt");
 const jwt =require("jsonwebtoken");
 const { Jwt_secrest } = require('../key');
+const RequireLogin = require('../middleware/RequireLogin');
 
 router.get('/', (req, res) => {
     res.send("hello");
 });
 
+router.get('/Createpost',RequireLogin,(req , res)=>{})
 router.post("/SingUp", (req, res) => {
     const { name, username, email, password } = req.body;
     if (!username || !name || !password || !email) {
@@ -62,8 +64,8 @@ router.post("/SingIn", (req, res) => {
             if(match){
                 // return res.status(200).json({message:"signed in successfully"})
                 const token =jwt.sign({_id:savedUser.id},Jwt_secrest)
-                console.log(token);
-                
+                res.json(token)
+                console.log(tokenres.json(token));
             }
             else{
                 return res.status(422).json({error:"Invalid password"})
