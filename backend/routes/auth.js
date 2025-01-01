@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
     res.send("hello");
 });
 
-router.get("/Createpost" , RequireLogin,(req,res)=>{
-    console.log("hello auth");
+// router.get("/Createpost" , RequireLogin,(req,res)=>{
+//     console.log("hello auth");
     
-})
+// })
 
 router.post("/SingUp", (req, res) => {
     const { name, username, email, password } = req.body;

@@ -1,13 +1,3 @@
-// const jwt =require("jsonwebtoken");
-// const { Jwt_secrest } = require("../key");
-// const Jwt_secrest =require("../key");
-// const mongoose =require("mongoose"); 
-// const USER = mongoose.model("USER");
-
-// module.exports=(res,req,next)=>{
-//     console.log("hello middalware");
-//     next()
-// }
 
 const jwt =require("jsonwebtoken")
 const {Jwt_secret} = require("../key")
@@ -19,7 +9,7 @@ const USER = mongoose.model("USER")
     if(!authorization){
         return res.status(401).json({error:"you must have logged in 1"})
     }
-    const token = authorization.replace("Bearer","")
+    const token = authorization.replace("Bearer ","")
 
     jwt.verify(token , Jwt_secret ,(err ,payload)=>{
         if(err){

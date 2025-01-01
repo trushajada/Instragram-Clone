@@ -35,11 +35,14 @@ const mongoose =require("mongoose");
 const {mongoUrl} =require("./key");
 const cors =require("cors");
 
+
 app.use(cors())
 mongoose.connect(mongoUrl);
+require('./models/post')
 require('./models/model');
 app.use(express.json())
 app.use(require('./routes/auth'));
+app.use(require("./routes/Creatpost"));
 
 mongoose.connection.on("connected",()=>{
     console.log("successfully coonect in mogooes");
