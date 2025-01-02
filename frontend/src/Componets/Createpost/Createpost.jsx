@@ -10,6 +10,7 @@ const Createpost = () => {
   const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
   const navigate = useNavigate()
+  
   useEffect(() => {
     if (url) {
 
