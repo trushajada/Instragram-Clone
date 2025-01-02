@@ -37,7 +37,7 @@ const Navbar = () => {
                         <ul className="flex space-x-4">
                             {
                                 loginStatus()
-                            }
+                                }
                         </ul>
                     </nav>
                 </div>

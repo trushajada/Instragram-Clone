@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import homeimg from "../../assets/images/homeimg.jpg";
 import post from "../../assets/images/post.jpg";
 import { GrFavorite } from "react-icons/gr";
 import { FiSmile } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
+    const navigate = useNavigate()
+    useEffect(()=>{
+        const token =localStorage.getItem("jwt");
+        if(!token){
+            navigate("./SingUp")
+        }
+    })
+
     return (
         <>
             <div className="home px-3">
