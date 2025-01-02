@@ -21,8 +21,7 @@ const SingIn = () => {
       return;
     }
   
-
-    try {
+  try {
       const res = await fetch("http://localhost:5000/SingIn", {
         method: 'POST',
         headers: {
