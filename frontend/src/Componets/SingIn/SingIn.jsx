@@ -1,12 +1,13 @@
 import React from "react";
-import { useState } from 'react';
+import { useState ,useContext} from 'react';
 import Logo from '../../assets/images/Logo.png';
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-
+import { Logincontext } from "../../Context/Logincontext";
 
 const SingIn = () => {
+  const {setUserLogin}=useContext(Logincontext)
   const navigate = useNavigate()
   const [password, setpassword] = useState('');
   const [email, setemail] = useState('');
@@ -40,8 +41,9 @@ const SingIn = () => {
           if(jsonData.error){
             notifyA(jsonData.error);
           }else{
-            notifyB(jsonData.message);
+            notifyB("SingIn successfully ");
             localStorage.setItem("jwt",jsonData.token);
+            setUserLogin(true)
             navigate('/');
           }
           console.log(jsonData);

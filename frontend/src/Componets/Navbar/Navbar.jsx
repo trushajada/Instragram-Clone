@@ -1,10 +1,10 @@
 import React from "react";
 import Logo from "../../assets/images/Logo.png"
-const Navbar = () => {
+const Navbar = ({login}) => {
 
     const loginStatus = () => {
         const token = localStorage.getItem("jwt")
-        if (token) {
+        if (token || login) {
             return [
                 <>
                     <li>
