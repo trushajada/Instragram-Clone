@@ -7,42 +7,25 @@ const Createpost = () => {
     const [body , setbody]=useState("");
     const [image , setImage]=useState("")
     const [url ,seturl]=useState("")
-    const navigate =useNavigate(    )
-    const notifyA = (msg) => toast.error(msg)
-    const notifyB = (msg) => toast.success(msg)
+   
+    useEffect(()=>{
+      if(url){
+        
+        fetch("http://localhost:5000/Createpost",{
+          method:"post",
+          headers:{"Content-type":"application/json",
+            "Authorization":"Bearer " + localStorage.getItem("jwt")
+          },
+          body:JSON.stringify({
+            body,
+            pic:url
+          })
+        }).then(res=>res.json())
+        .then(data=>console.log(data))
+        .catch(err=>console.log(err))
+      }
+    },[url])
   
-  
-    // useEffect(() => {
-  
-    //   if (Url) {
-  
-    //     fetch("http://localhost:5000/createPost", {
-    //       method: "post",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         "Authorization": "Bearer " + localStorage.getItem("jwt" ,data.token)
-    //       },
-    //       body: JSON.stringify({
-    //         body,
-    //         pic: Url
-    //       })
-    //     }).then(res => res.json())
-    //       .then(data => {
-    //         if (data.error) {
-    //           notifyA(data.error)
-    //         } else {
-    //           notifyB("Successfully Posted");
-    //           console.log(data.token);
-              
-    //           navigate("/")
-    //         }
-    //       })
-    //       .catch(err => console.log(err))
-    //   }
-  
-    // }, [Url])
-    
-
   
     // posting image to cloudinary
     const postDetails = () => {
@@ -60,18 +43,6 @@ const Createpost = () => {
         .then(data => seturl(data.url))
         .catch(err => console.log(err))
   
-        fetch("http://localhost:5000/Createpost",{
-          method:"post",
-          headers:{"Content-type":"application/json"
-            
-          },
-          body:JSON.stringify({
-            body,
-            pic:url
-          })
-        }).then(res=>res.json())
-        .then(data=>console.log(data))
-        .catch(err=>console.log(err))
     }
     
     var loadFile = function(e) {
