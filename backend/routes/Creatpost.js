@@ -8,9 +8,9 @@ const POST =mongoose.model("post")
 
 
 
-router.get("/allposts",(req,res)=>{
+router.get("/allposts",RequireLogin,(req,res)=>{
     POST.find()
-    .populate("postedBy")
+    .populate("postedBy","_id name")
     .then(posts => res.json(posts))
     .catch(err => console.log(err))
 })

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import homeimg from "../../assets/images/homeimg.jpg";
 import post from "../../assets/images/post.jpg";
 import { GrFavorite } from "react-icons/gr";
@@ -8,19 +8,28 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate()
-    
+    const [data , setdata]=useState([])
     useEffect(()=>{
         const token =localStorage.getItem("jwt");
         if(!token){
             navigate("./SingUp")
         }
     })
-
+    fetch("http://localhost:5000/allposts",{
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("jwt")
+          },
+    }).then(res=>res.json())
+    .then(result =>setdata(result))
+    .catch(err =>console.log(err))
+  
     return (
         <>
             <div className="home px-3">
                 {/* card */}
-                <div className="container mx-auto">
+                {data.map((posts)=>{
+                    return(
+<div className="container mx-auto">
                     <div className="card  border justify-center items-center py-7 max-w-lg mx-auto mt-5">
                         <div className="card-header flex w-36 items-center">
                             <img src={homeimg} alt="img" className="w-10 h-10 rounded-full mx-auto"/>
@@ -42,6 +51,10 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+                    )
+                    
+                })}
+                
 
             </div>
         </>
