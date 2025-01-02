@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate()
+    
     useEffect(()=>{
         const token =localStorage.getItem("jwt");
         if(!token){

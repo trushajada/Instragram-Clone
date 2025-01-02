@@ -5,7 +5,7 @@ const Navbar = ({login}) => {
 
     const loginStatus = () => {
         const token = localStorage.getItem("jwt")
-        if (login || token) {
+        if (token || login) {
             return [
                 <>
                     <li>

@@ -2,21 +2,24 @@ import{BrowserRouter , Route , Routes} from 'react-router-dom'
 import Navbar from './Componets/Navbar/Navbar';
 import SingIn from './Componets/SingIn/SingIn';
 import SingUp from './Componets/SingUp/SingUp';
-// import React,{createContext ,useState} from "react";
-import './App.css'
+import './App.css';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Home from './Componets/Home/Home';
 import Profile from './Componets/Profile/Profile';
 import Createpost from './Componets/Createpost/Createpost';
-// import { Logincontext } from './Context/Logincontext';
+import { Logincontext } from './Context/Logincontext';
+import React ,{createContext , useState} from "react";
+
+
 
 function App() {
-  // const [userLogin , setuserLogin]=useState(false)
+  const [userLogin ,setuserLogin] =useState(false)
 
   return (
     <BrowserRouter>
-    <Navbar />
+    <Logincontext.Provider value={{setuserLogin}}>
+    <Navbar login={userLogin}/>
         <Routes>
             <Route path='/' element={<Home/>}></Route>
             <Route path='/Profile' element={<Profile/>}></Route>
@@ -25,7 +28,7 @@ function App() {
           <Route path="/Createpost" element={<Createpost/>} />
         </Routes>
     <ToastContainer theme='dark'/>
-    
+    </Logincontext.Provider>
     </BrowserRouter>
   );
 }
