@@ -9,7 +9,8 @@ router.post("/Createpost",RequireLogin,(req , res)=>{
     if(!title || !body){
         return res.status(422).json({error:"please add all the fields"})
     }
-    req.user
+    console.log( req.user);
+    
     const post = new POST({
         title,
         body,

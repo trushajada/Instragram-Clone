@@ -15,37 +15,83 @@ const SingIn = () => {
 
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+  // const postdata = async () => {
+  //   if (!emailRegex.test(email)) {
+  //     notifyA("Invalid email address");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const res = await fetch("http://localhost:5000/SingIn", {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         email,
+  //         password,
+  //       }),
+  //     });
+  
+  //     const data = await res.json();
+  
+  //     if (data.error) {
+  //       notifyA(data.error);
+  //     } else {
+  //       notifyB(data.message);
+  //       console.log(data.token);
+  //       localStorage.setItem("jwt", data.token);
+  //       navigate('/');
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     notifyA("An error occurred. Please try again.");
+  //   }
+  // };
+
+
+
   const postdata = async () => {
     if (!emailRegex.test(email)) {
-      notifyA("Invalid email address");
-      return;
-    }
-  
-  try {
-      const res = await fetch("http://localhost:5000/SingIn", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+         notifyA("Invalid email address");
+          return;
+         }
 
-      const data = await res.json();
+    try {
+        const res = await fetch("http://localhost:5000/SingIn", {
+          method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  email,
+                 password,
+               }),
+            });
 
-      if (data.error) {
-        notifyA(data.error);
-      } else {
-        notifyB(data.message);
-        navigate('/');
-      }
+
+        const data = await res.text();
+        try {
+          const jsonData = JSON.parse(data)
+          if(jsonData.error){
+            notifyA(jsonData.error);
+          }else{
+            notifyB(jsonData.message);
+            localStorage.setItem("jwt",jsonData.token);
+            navigate('/');
+          }
+          console.log(jsonData);
+          
+        } catch (parseError) {
+          localStorage.setItem("jwt", data); 
+          notifyB("Login successful");
+          navigate('/');
+        }
     } catch (error) {
-      console.error("Fetch error:", error);
-      notifyA("Please try again later");
+        console.error("Fetch error:", error);
+        notifyA(error.message || "An error occurred during login.");
     }
-  };
+};
 
   return (
     <>
@@ -102,3 +148,5 @@ const SingIn = () => {
   )
 }
 export default SingIn
+
+

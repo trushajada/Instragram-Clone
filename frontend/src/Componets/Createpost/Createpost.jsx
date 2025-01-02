@@ -6,41 +6,41 @@ const Createpost = () => {
     
     const [body , setbody]=useState("");
     const [image , setImage]=useState("")
-    const [Url ,setUrl]=useState("")
+    const [url ,seturl]=useState("")
     const navigate =useNavigate(    )
     const notifyA = (msg) => toast.error(msg)
     const notifyB = (msg) => toast.success(msg)
   
   
-    useEffect(() => {
+    // useEffect(() => {
   
-      if (Url) {
+    //   if (Url) {
   
-        fetch("http://localhost:5000/createPost", {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("jwt" ,data.token)
-          },
-          body: JSON.stringify({
-            body,
-            pic: Url
-          })
-        }).then(res => res.json())
-          .then(data => {
-            if (data.error) {
-              notifyA(data.error)
-            } else {
-              notifyB("Successfully Posted");
-              console.log(data.token);
+    //     fetch("http://localhost:5000/createPost", {
+    //       method: "post",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Authorization": "Bearer " + localStorage.getItem("jwt" ,data.token)
+    //       },
+    //       body: JSON.stringify({
+    //         body,
+    //         pic: Url
+    //       })
+    //     }).then(res => res.json())
+    //       .then(data => {
+    //         if (data.error) {
+    //           notifyA(data.error)
+    //         } else {
+    //           notifyB("Successfully Posted");
+    //           console.log(data.token);
               
-              navigate("/")
-            }
-          })
-          .catch(err => console.log(err))
-      }
+    //           navigate("/")
+    //         }
+    //       })
+    //       .catch(err => console.log(err))
+    //   }
   
-    }, [Url])
+    // }, [Url])
     
 
   
@@ -50,16 +50,28 @@ const Createpost = () => {
       console.log(body, image)
       const data = new FormData()
       data.append("file", image)
-      data.append("upload_preset", "insta-clone")
-      data.append("cloud_name", "cloned")
-      fetch("https://api.cloudinary.com/v1_1/cloned/image/upload", {
+      data.append("upload_preset", "instragram-clone")
+      data.append("cloud_name", "instra-clone")
+
+      fetch("https://api.cloudinary.com/v1_1/instra-clone/image/upload", {
         method: "post",
         body: data
       }).then(res => res.json())
-        .then(data => setUrl(data.url))
+        .then(data => seturl(data.url))
         .catch(err => console.log(err))
-      console.log(Url)
   
+        fetch("http://localhost:5000/Createpost",{
+          method:"post",
+          headers:{"Content-type":"application/json"
+            
+          },
+          body:JSON.stringify({
+            body,
+            pic:url
+          })
+        }).then(res=>res.json())
+        .then(data=>console.log(data))
+        .catch(err=>console.log(err))
     }
     
     var loadFile = function(e) {
@@ -76,13 +88,13 @@ const Createpost = () => {
                     <div className="post border justify-center items-center py-4  max-w-lg mx-auto mt-5">
                         <div className="post-header flex border-b-2 ">
                             <h3 className="text-center font-semibold text-xl mx-auto mb-3">Create New Post</h3>
-                            <button className="bg-gray-100 w-12 text-blue-400 font-semibold mb-3 me-1" >Share</button>
+                            <button className="bg-gray-100 w-12 text-blue-400 font-semibold mb-3 me-1" onClick={()=>{postDetails()}}>Share</button>
                         </div>
                         <div className="main-div p-3 border-b-2">
                         <img  id="output" className="w-2/3 mx-auto" />
                             <input type="file" accept="image/*"  onChange={(e)=>{
                                 loadFile(e);
-                                
+                                setImage(e.target.files[0])
                                 }}/>
                         </div>
                         <div className="detail flex items-center">
@@ -92,7 +104,7 @@ const Createpost = () => {
                             <h5>Trusha-Jada</h5>
                         </div>
                         <div className="p-3">
-                        <textarea name="" id="" placeholder="Write Caption" className="border w-full h-[100px]"></textarea>
+                        <textarea name="" id="" placeholder="Write Caption" className="border w-full h-[100px]" onChange={(e)=>{setbody(e.target.value)}}></textarea>
                         </div>
                         
                     </div>
