@@ -8,7 +8,7 @@ const POST =mongoose.model("post")
 
 
 
-router.get("/allposts",RequireLogin,(req,res)=>{
+router.get("/allposts",(req,res)=>{
     POST.find()
     .populate("postedBy")
     .then(posts => res.json(posts))
