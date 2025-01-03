@@ -36,7 +36,7 @@ const Home = () => {
                         <div className="card  border justify-center items-center py-7 max-w-lg mx-auto mt-5">
                             <div className="card-header flex w-36 items-center">
                                 <img src={homeimg} alt="img" className="w-10 h-10 rounded-full mx-auto"/>
-                                <h1 className="font-semibold">Trusha-jada</h1>
+                                <h1 className="font-semibold">{post.postedBy?.name || "Unknown"}</h1>
                             </div>
                             <br />
                             <div className="card-images">
