@@ -10,6 +10,7 @@ import Profile from './Componets/Profile/Profile';
 import Createpost from './Componets/Createpost/Createpost';
 import { Logincontext } from './Context/Logincontext';
 import React ,{createContext , useState} from "react";
+import Modal from './Componets/Modal';
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/Createpost" element={<Createpost/>} />
         </Routes>
     <ToastContainer theme='dark'/>
+    <Modal/>
     </Logincontext.Provider>
     </BrowserRouter>
   );
