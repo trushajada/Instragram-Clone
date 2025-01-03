@@ -2,21 +2,20 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 const RequireLogin = require('../middleware/RequireLogin');
-// const POST = mongoose.model("POST");
-
-const POST =mongoose.model("post")
+const POST = mongoose.model("posts")
 
 
 
-router.get("/allposts",RequireLogin,(req,res)=>{
+router.get("/allposts",(req,res)=>{
     POST.find()
-    .populate("postedBy","_id name")
+    
     .then(posts => res.json(posts))
     .catch(err => console.log(err))
 })
 
 
 router.post("/Createpost",RequireLogin,(req , res)=>{
+
     const {body,pic}=req.body
     console.log(pic);
     

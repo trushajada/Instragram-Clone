@@ -15,4 +15,4 @@ const postSchema =new mongoose.Schema({
         ref:"USER"
     }
 })
-mongoose.model("post",postSchema)
+mongoose.model("posts",postSchema)
