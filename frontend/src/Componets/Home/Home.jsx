@@ -29,7 +29,7 @@ const Home = () => {
             <div className="home px-3">
                 {/* card */}
                 {data.map((posts)=>{
-                    console.log(posts);
+                    // console.log(posts);
                     
                     return(
                         <div className="container mx-auto">
@@ -40,12 +40,12 @@ const Home = () => {
                             </div>
                             <br />
                             <div className="card-images">
-                                <img src={post} alt="" className="mx-auto w-full max-h-[700px]"/>
+                                <img src={posts.photo} alt="" className="mx-auto w-full max-h-[700px]"/>
                             </div>
                             <div className="card-content ">
                            <span><GrFavorite  className="w-10 text-2xl mt-5"/></span> 
                             <p className=" text-md mt-4 ms-2">1 like</p>
-                            <p className=" text-md mt-1 ms-2">Amazing is place</p>
+                            <p className=" text-md mt-1 ms-2">{posts.body}</p>
                             </div>
                             <div className="card-comment flex mt-3 border  space-x-2">
                                 <span><FiSmile className="text-xl mt-2 w-10"/></span>

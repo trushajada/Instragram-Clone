@@ -8,11 +8,11 @@ const postSchema =new mongoose.Schema({
     },
     photo:{
         type:String,
-        default:true
+        require:true
     },
     postedBy:{
         type:ObjectId,
         ref:"USER"
     }
 })
-mongoose.model("posts",postSchema)
+mongoose.model("POST",postSchema)
