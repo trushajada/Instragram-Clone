@@ -13,6 +13,7 @@ import { Logincontext } from './Context/Logincontext';
 import Modal from './Componets/Modal';
 
 
+
 function App() {
   const [userLogin ,setuserLogin] =useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false); 
@@ -29,11 +30,13 @@ function App() {
           <Route path="/Createpost" element={<Createpost/>} />
         </Routes>
     <ToastContainer theme='dark'/>  
-
-    {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}></Modal>}
+    {/* <Modal/> */}
+    {/* {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}></Modal>} */}
+    {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}/> } 
     </Logincontext.Provider>
     </BrowserRouter>
   );
 }
 export default App;
 
+// 

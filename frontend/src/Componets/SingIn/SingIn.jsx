@@ -42,7 +42,7 @@ const SingIn = () => {
             notifyA(jsonData.error);
           }else{
             notifyB("SingIn successfully ");
-            localStorage.setItem("jwt",jsonData.token);
+            localStorage.setItem("jwt",jsonData);
             setUserLogin(true)
             navigate('/');
           }

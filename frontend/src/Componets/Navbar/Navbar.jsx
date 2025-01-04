@@ -3,10 +3,10 @@ import Logo from "../../assets/images/Logo.png";
 import { Logincontext } from "../../Context/Logincontext";
 
 const Navbar = ({login}) => {
-    const{setIsModalOpen} =useContext(Logincontext)
+const {setIsModalOpen } =useContext(Logincontext)
     const loginStatus = () => {
         const token = localStorage.getItem("jwt")
-        if (login || token) {
+        if (token || login) {
             return [
                 <>
                     <li>
@@ -16,7 +16,7 @@ const Navbar = ({login}) => {
                         <a href="Createpost" className=" font-semibold">Create post</a>
                     </li>
                     <li>
-                        <button className="bg-red-500 px-5 p-2 rounded-lg text-white cursor-pointer shadow-lg hover:shadow-red-700" onClick={setIsModalOpen(true)}>
+                        <button className="bg-red-500 px-5 p-2 rounded-lg text-white cursor-pointer shadow-lg hover:shadow-red-700" onClick={()=>setIsModalOpen(true)}>
                             Log out
                         </button>
                     </li>
@@ -41,10 +41,10 @@ const Navbar = ({login}) => {
                 <div className="container mx-auto  flex justify-between items-center">
                     <h1 className="w-40 "><img src={Logo} alt="Logo" /></h1>
                     <nav >
-                        <ul className="flex space-x-4 items-baseline ">
+                        <ul className="flex space-x-4 items-baseline " >
                             {
                                 loginStatus()
-                                }
+                            }
                         </ul>
                     </nav>
                 </div>
@@ -52,4 +52,4 @@ const Navbar = ({login}) => {
         </>
     )
 }
-export default Navbar
+export default Navbar 

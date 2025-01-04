@@ -18,15 +18,19 @@ const Home = () => {
         fetch("http://localhost:5000/allposts",{
             headers:{
                 "authorization": "Bearer " + localStorage.getItem("jwt")
+                
             },
         }).then(res=> res.json())
         .then(result => setdata(result))
         .catch(err => console.log(err))
-    },[])
+    },
+
+    [])
 
     return (
         < >
-            <div className="home px-3" >
+            <div className="home px-3"
+            >
                 {/* card */}
                 {data.map((posts)=>{
                     
