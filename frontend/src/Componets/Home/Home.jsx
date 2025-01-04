@@ -25,14 +25,13 @@ const Home = () => {
     },[])
 
     return (
-        <>
-            <div className="home px-3">
+        < >
+            <div className="home px-3" >
                 {/* card */}
                 {data.map((posts)=>{
-                    // console.log(posts);
                     
                     return(
-                        <div className="container mx-auto">
+                        <div className="container mx-auto" >
                         <div className="card  border justify-center items-center py-7 max-w-lg mx-auto mt-5">
                             <div className="card-header flex w-36 items-center">
                                 <img src={homeimg} alt="img" className="w-10 h-10 rounded-full mx-auto"/>
