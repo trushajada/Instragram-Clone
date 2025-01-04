@@ -16,10 +16,11 @@ import Modal from './Componets/Modal';
 
 function App() {
   const [userLogin ,setuserLogin] =useState(false)
+  const[modal ,setmodal]=useState(false)
 
   return (
     <BrowserRouter>
-    <Logincontext.Provider value={{setuserLogin}}>
+    <Logincontext.Provider value={{setuserLogin ,setmodal}}>
     <Navbar login={userLogin}/>
         <Routes>
             <Route path='/' element={<Home/>}></Route>
@@ -29,7 +30,7 @@ function App() {
           <Route path="/Createpost" element={<Createpost/>} />
         </Routes>
     <ToastContainer theme='dark'/>
-    <Modal/>
+    {/* <Modal/> */}
     </Logincontext.Provider>
     </BrowserRouter>
   );
