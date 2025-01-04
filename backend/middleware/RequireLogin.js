@@ -1,24 +1,26 @@
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose')
-const USER = mongoose.model("USER")
+
+const jwt =require("jsonwebtoken")
 const {Jwt_secret} = require("../key")
+const mongoose = require("mongoose")
+const USER = mongoose.model("USER")
 
-module.exports = (req, res, next) => {
-    const { authorization } = req.headers;
-    if (!authorization) {
-        return res.status(401).json({ error: "you must be logged in" });
+    module.exports=(res ,req ,next)=>{
+    const {authorization}=res.headers;
+    if(!authorization){
+        return res.status(401).json({error:"you must have logged in 1"})
     }
-    const token = authorization.replace("Bearer ", "");
-    jwt.verify(token, Jwt_secret, (err, payload) => {
-        if (err) {
-            return res.status(401).json({ error: "you must be logged in" });
-        }
+    const token = authorization.replace("Bearer ","")
 
-        const { _id } = payload;
-        USER.findById(_id).then(userdata=>{
-            req.user = userdata
-            next();
+    jwt.verify(token , Jwt_secret ,(err ,payload)=>{
+        if(err){
+            return res.status(401).json({error:"You must have logged in 2"})
+        };
+
+        const {_id}=payload
+        USER.findById(_id).then(userData=>{
+            req.user = userData
+            next()
         })
-    });
-};
+    })
+}
 

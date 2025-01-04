@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect ,useState } from "react";
 import homeimg from "../../assets/images/homeimg.jpg";
 
 const Profile = () => {
+    const [usepic , setusepic]=useState([])
+
+    useEffect(()=>{
+         fetch("http://localhost:5000/myposts",{
+            headers:{
+                Authorization: "Bearer " + localStorage.getItem("jwt")
+            }
+         })   
+        .then(res=>res.json())
+        .then((result)=>console.log(result))
+    },[])
+
     return (
         <>
             <div className="profile px-3">
+                {usepic .map((usepic)=>{
+                    return <img src={usepic.photo}></img>
+                })}
                 <div className="container mx-auto">
                     <div className="profile-frame  items-center py-7 max-w-lg mx-auto mt-5 flex border-b-4">
                         <div className="profile-pic flex ">
