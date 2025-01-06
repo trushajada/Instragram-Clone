@@ -30,8 +30,7 @@ function App() {
           <Route path="/Createpost" element={<Createpost/>} />
         </Routes>
     <ToastContainer theme='dark'/>  
-    {/* <Modal/> */}
-    {/* {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}></Modal>} */}
+   
     {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}/> } 
     </Logincontext.Provider>
     </BrowserRouter>

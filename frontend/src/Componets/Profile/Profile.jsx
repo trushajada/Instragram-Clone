@@ -11,15 +11,13 @@ const Profile = () => {
             }
          })   
         .then(res=>res.json())
-        .then((result)=>console.log(result))
+        .then((result)=>setusepic(result))
     },[])
 
     return (
         <>
             <div className="profile px-3">
-                {usepic .map((usepic)=>{
-                    return <img src={usepic.photo}></img>
-                })}
+               
                 <div className="container mx-auto">
                     <div className="profile-frame  items-center py-7 max-w-lg mx-auto mt-5 flex border-b-4">
                         <div className="profile-pic flex ">
@@ -36,12 +34,9 @@ const Profile = () => {
 
                     </div>
                     <div className="profile-pic w-1/3 grid grid-cols-3 gap-4 items-center justify-center mx-auto mt-5 ">
-                        <img src={homeimg} alt="" />
-                        <img src={homeimg} alt="" />
-                        <img src={homeimg} alt="" />
-                        <img src={homeimg} alt="" />
-                        <img src={homeimg} alt="" />
-                        <img src={homeimg} alt="" />
+                    {usepic.map((posts)=>{
+                    return <img src={posts.photo}></img>
+                })}
 
                     </div>
                 </div>

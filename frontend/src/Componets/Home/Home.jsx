@@ -28,9 +28,8 @@ const Home = () => {
     [])
 
     return (
-        < >
-            <div className="home px-3"
-            >
+        <>
+            <div className="home px-3">
                 {/* card */}
                 {data.map((posts)=>{
                     
