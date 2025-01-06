@@ -43,7 +43,7 @@ const Home = () => {
                             <br />
                             <div className="card-images">
                                 {/* <img src={posts.pic} alt="" className="mx-auto w-full max-h-[700px]"/> */}
-                                <img src={posts.photo} alt="" className="mx-auto w-full max-h-[700px]"/>
+                                <img src={posts.photo} alt="" className="mx-auto w-full max-h-[700px] "/>
 
                             </div>
                             <div className="card-content ">
