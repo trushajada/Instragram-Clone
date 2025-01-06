@@ -27,16 +27,15 @@ const postSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        pic: {
+        photo: {
             type: String,
             require:true,
         },
         postedBy: {
             type: ObjectId,
-            ref: "User",
+            ref: "USER",
         },
     },
-    { timestamps: true } // Adds createdAt and updatedAt fields
 );
 
 mongoose.model("POST", postSchema);

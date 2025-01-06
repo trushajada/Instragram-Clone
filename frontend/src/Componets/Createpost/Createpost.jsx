@@ -53,7 +53,8 @@ const Createpost = () => {
     }).then(res => res.json())
       .then(data => seturl(data.url))
       .catch(err => console.log(err))
-
+    console.log(url);
+    
   }
 
   var loadFile = function (e) {

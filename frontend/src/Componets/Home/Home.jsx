@@ -42,7 +42,9 @@ const Home = () => {
                             </div>
                             <br />
                             <div className="card-images">
+                                {/* <img src={posts.pic} alt="" className="mx-auto w-full max-h-[700px]"/> */}
                                 <img src={posts.photo} alt="" className="mx-auto w-full max-h-[700px]"/>
+
                             </div>
                             <div className="card-content ">
                            <span><GrFavorite  className="w-10 text-2xl mt-5"/></span> 

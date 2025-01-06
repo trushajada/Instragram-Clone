@@ -12,7 +12,6 @@ router.get("/allposts", RequireLogin, (req, res) => {
         .then(posts => res.json(posts))
         .catch(err => console.log(err))
 })
-
 router.post("/Createpost", RequireLogin, (req, res) => {
     const { body, pic } = req.body;
     console.log(pic)
