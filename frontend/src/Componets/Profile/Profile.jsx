@@ -37,8 +37,7 @@ const Profile = () => {
                     {usepic.map((posts)=>{
                     return <img src={posts.photo} className="object-cover"></img>
                 })}
-
-                    </div>
+                 </div>
                 </div>
 
             </div>
