@@ -58,15 +58,3 @@ const Profile = () => {
 }
 
 export default Profile
-
-// const [data, setData] = useState([]); // Assuming your list data is in `data`
-
-// return (
-//   <ul>
-//     {data.map((item) => (
-//       <li key={item.id}> {/* Use item.id as the key if it's unique */}
-//         {item.name}
-//       </li>
-//     ))}
-//   </ul>
-// );

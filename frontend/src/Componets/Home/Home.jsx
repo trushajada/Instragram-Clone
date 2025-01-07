@@ -5,11 +5,14 @@ import { GrFavorite } from "react-icons/gr";
 import { FiSmile } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import { toast } from 'react-toastify';
 
-
+// const notifyA = (msg) => toast.error(msg);
+const notifyB = (msg) => toast.success(msg);
 const Home = () => {
     const navigate = useNavigate()
     const [data, setdata] = useState([])
+    const [comment, setcomment] = useState('')
     useEffect(() => {
         const token = localStorage.getItem("jwt");
         if (!token) {
@@ -17,18 +20,18 @@ const Home = () => {
         }
 
         // Fetching all posts
-        fetch("http://localhost:5000/allposts", {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("jwt"),
-            },
-        })
-            .then((res) => res.json())
-            .then((result) => {
-                console.log(result);
-                setdata(result);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+          fetch("http://localhost:5000/allposts", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setdata(result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
     //      const likepost = (id) => {
     //   fetch("http://localhost:5000/likes", {
@@ -67,8 +70,8 @@ const Home = () => {
     //         })
     //      }
 
+  
 
- 
     return (
         <>
             <div className="home px-3">
@@ -89,27 +92,37 @@ const Home = () => {
                                 </div>
 
                                 <div className="card-content">
-                                <span><GrFavorite className="text-xl mt-2 w-10" /></span>
-                                
+                                    <span><GrFavorite className="text-xl mt-2 w-10" /></span>
+
                                     <p className=" text-md mt-4 ms-2">1 like</p>
                                     <p className=" text-md mt-1 ms-2">{post.body}</p>
                                 </div>
-                                <div className="card-comment flex mt-3 border  space-x-2">
-                                    <span><FiSmile className="text-xl mt-2 w-10" /></span>
-                                    <input type="text" placeholder="Add a comment" className=" mx-auto flex w-full" />
-                                    <button className="commit  p-1 mx-auto flex w-10 text-blue-400 font-semibold outline-none"><p className="text-center"> Post</p></button>
+                                <div className="card-comment flex mt-3 border space-x-2 p-2 rounded-md bg-white">
+                                    <span>
+                                        <FiSmile className="text-xl mt-1 w-6 text-gray-500" />
+                                    </span>
+                                    <input
+                                        type="text"
+                                        placeholder="Add a comment"
+                                        className="flex-grow border rounded-md px-2 py-1 focus:outline-none focus:ring focus:ring-blue-300"
+                                        value={comment}
+                                        onChange={(e) => setcomment(e.target.value)} // Use onChange
+                                    />
+                                    <button
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                                    >
+                                        Post
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     )
 
                 })}
-
-
             </div>
         </>
     )
 }
-export default Home 
+export default Home
 
 
