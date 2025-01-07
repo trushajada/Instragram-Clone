@@ -34,10 +34,21 @@ const Profile = () => {
                                 <p>40 following</p>
                             </div>
                         </div>
+
                     </div>
                     <div className="profile-pic w-1/3 grid grid-cols-3 gap-4 items-center justify-center mx-auto mt-5 ">
-                        {Pic.map((Pic) => {
-                            return <img  src={Pic.photo} className="object-cover"></img> })}
+                        {/* {usepic.map((post)=>{
+                    return <img key={post.id} src={post.photo} className="object-cover"></img>
+                })} */}
+
+                        {/* {data.map((posts) => (
+      <div key={posts.id}> 
+        <img src={posts.photo || "path/to/placeholder.jpg"} className="object-cover" />
+      </div>
+    ))} */}
+
+                        {Pic.map((pic) => {
+                            return <img  src={pic.photo} className="object-cover"></img> })}
                     </div>
                 </div>
 

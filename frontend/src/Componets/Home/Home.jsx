@@ -10,22 +10,25 @@ import "./Home.css";
 const Home = () => {
     const navigate = useNavigate()
     const [data, setdata] = useState([])
-    useEffect(() => {
-        const token = localStorage.getItem("jwt");
-        if (!token) {
-            navigate("./SingUp")
-        }
+   useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      navigate("./signup");
+    }
 
-        fetch("http://localhost:5000/allposts", {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-
-            },
-        }).then(res => res.json())
-            .then(result => setdata(result))
-            .catch(err => console.log(err))
-    },
-     []);
+    // Fetching all posts
+    fetch("http://localhost:5000/allposts", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setdata(result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
     
 //      const likepost = (id) => {
 //   fetch("http://localhost:5000/like", {
