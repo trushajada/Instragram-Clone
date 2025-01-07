@@ -10,62 +10,65 @@ import "./Home.css";
 const Home = () => {
     const navigate = useNavigate()
     const [data, setdata] = useState([])
-   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (!token) {
-      navigate("./signup");
-    }
+    useEffect(() => {
+        const token = localStorage.getItem("jwt");
+        if (!token) {
+            navigate("./signup");
+        }
 
-    // Fetching all posts
-    fetch("http://localhost:5000/allposts", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        setdata(result);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-    
-//      const likepost = (id) => {
-//   fetch("http://localhost:5000/like", {
-//     method: "put",
-//     headers: {
-//       "Content-type": "application/json",
-//       Authorization: "Bearer " + localStorage.getItem("jwt"),
-//     },
-//     body: JSON.stringify({ postId: id }),
-//   })
-//     .then(response => response.json())
-//     .then((data) => {
-      
-//       console.log("Like response:", data); 
-//     })
-//     .catch((error) => {
-//       console.error("Error liking post:", error);
-//     });
-// };
-//      const unlikepost=(id)=>{
-//         fetch("http://localhost:5000/unlike",{
-//             method:"put",
-//             headers: {
-//                 "Content-type": "application/json",
-//                 Authorization: "Bearer " + localStorage.getItem("jwt")
+        // Fetching all posts
+        fetch("http://localhost:5000/allposts", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("jwt"),
+            },
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result);
+                setdata(result);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
-//               },
-//               body:JSON.stringify({
-//                 postId:id
-//               })
-//         }).then(res=>res.json())
-//         .then((result)=>{
-//             console.log(result);
-            
-//         })
-//      }
+    //      const likepost = (id) => {
+    //   fetch("http://localhost:5000/likes", {
+    //     method: "put",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       Authorization: "Bearer " + localStorage.getItem("jwt"),
+    //     },
+    //     body: JSON.stringify({ postId: id }),
+    //   })
+    //     .then(response => response.json())
+    //     .then((data) => {
 
+    //       console.log("Like response:", data); 
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error liking post:", error);
+    //     });
+    // };
+
+    //      const unlikepost=(id)=>{
+    //         fetch("http://localhost:5000/unlike",{
+    //             method:"put",
+    //             headers: {
+    //                 "Content-type": "application/json",
+    //                 Authorization: "Bearer " + localStorage.getItem("jwt")
+
+    //               },
+    //               body:JSON.stringify({
+    //                 postId:id
+    //               })
+    //         }).then(res=>res.json())
+    //         .then((result)=>{
+    //             console.log(result);
+
+    //         })
+    //      }
+
+
+ 
     return (
         <>
             <div className="home px-3">
@@ -84,14 +87,10 @@ const Home = () => {
                                     <img src={post.photo} alt="" className="mx-auto w-full max-h-[700px] " />
 
                                 </div>
-                                {/* <div className="heart flex">
-                                <span><GrFavorite className="w-10 text-2xl mt-5 material-symbols-outlined" onClick={()=>{likepost(post._id)}}/></span>
-                                <span><GrFavorite className="w-10 text-2xl mt-5 material-symbols-outlined-red" onClick={()=>{unlikepost(post._id)}}/></span>
-                                </div> */}
-                               
+
                                 <div className="card-content">
-                                    
-                                <span><GrFavorite className="w-10 text-2xl mt-5 material-symbols-outlined" /></span>
+                                <span><GrFavorite className="text-xl mt-2 w-10" /></span>
+                                
                                     <p className=" text-md mt-4 ms-2">1 like</p>
                                     <p className=" text-md mt-1 ms-2">{post.body}</p>
                                 </div>
@@ -111,4 +110,6 @@ const Home = () => {
         </>
     )
 }
-export default Home  
+export default Home 
+
+

@@ -36,35 +36,35 @@ router.get("/myposts",RequireLogin,(req,res)=>{
     .then(myposts=>{
         res.json(myposts)
     })
-    
-    
 })
 
-// router.put("/likes",RequireLogin,(req,res)=>{
-//     POST.findByIdAndUpdate(req.body.postId,{
-//         $push:{likes:req.user._id}
-//     },{
-//         new:true
-//     }).exec((err ,result)=>{
-//         if(err){
-//             return res . status(422).json({error:err})
-//         }else{
-//             res.json(result)
-//         }
-//     })
-// })
+router.put("/likes",RequireLogin,(req,res)=>{
+    POST.findByIdAndUpdate(req.body.postId,{
+        $push:{likes:req.user._id}
+    },{
+        new:true
+    }).exec((err ,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+})
 
-// router.put("/unlikes",RequireLogin,(req,res)=>{
-//     POST.findByIdAndUpdate(req.body.postId,{
-//         $pull:{likes:req.user._id}
-//     },{
-//         new:true
-//     }).exec((err ,result)=>{
-//         if(err){
-//             return res . status(422).json({error:err})
-//         }else{
-//             res.json(result)
-//         }
-//     })
-// })
+router.put("/unlike",RequireLogin,(req,res)=>{
+    POST.findByIdAndUpdate(req.body.postId,{
+        $pull:{likes:req.user._id}
+    },{
+        new:true
+    }).exec((err ,result)=>{
+        if(err){
+            return res . status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+})
+
+
 module.exports=router
