@@ -2,7 +2,7 @@ import React, { useEffect ,useState } from "react";
 import homeimg from "../../assets/images/homeimg.jpg";
 
 const Profile = () => {
-    const [usepic , setusepic]=useState([])
+    const [data, setData] = useState([]);
 
     useEffect(()=>{
          fetch("http://localhost:5000/myposts",{
@@ -11,7 +11,7 @@ const Profile = () => {
             }
          })   
         .then(res=>res.json())
-        .then((result)=>setusepic(result))
+        .then((result)=>setData(result))
     },[])
 
     return (
@@ -34,10 +34,16 @@ const Profile = () => {
 
                     </div>
                     <div className="profile-pic w-1/3 grid grid-cols-3 gap-4 items-center justify-center mx-auto mt-5 ">
-                    {usepic.map((posts)=>{
-                    return <img src={posts.photo} className="object-cover"></img>
-                })}
-                 </div>
+                    {/* {usepic.map((post)=>{
+                    return <img key={post.id} src={post.photo} className="object-cover"></img>
+                })} */}
+                
+    {data.map((posts) => (
+      <div key={posts.id}> 
+        <img src={posts.photo || "path/to/placeholder.jpg"} className="object-cover" />
+      </div>
+    ))}
+               </div>
                 </div>
 
             </div>
@@ -46,3 +52,15 @@ const Profile = () => {
 }
 
 export default Profile
+
+// const [data, setData] = useState([]); // Assuming your list data is in `data`
+
+// return (
+//   <ul>
+//     {data.map((item) => (
+//       <li key={item.id}> {/* Use item.id as the key if it's unique */}
+//         {item.name}
+//       </li>
+//     ))}
+//   </ul>
+// );
