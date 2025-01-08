@@ -33,93 +33,78 @@ const Home = () => {
       .catch((err) => console.log(err));
   }, []);
 
-    //      const likepost = (id) => {
-    //   fetch("http://localhost:5000/likes", {
-    //     method: "put",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       Authorization: "Bearer " + localStorage.getItem("jwt"),
-    //     },
-    //     body: JSON.stringify({ postId: id }),
-    //   })
-    //     .then(response => response.json())
-    //     .then((data) => {
-
-    //       console.log("Like response:", data); 
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error liking post:", error);
-    //     });
-    // };
-
-    //      const unlikepost=(id)=>{
-    //         fetch("http://localhost:5000/unlike",{
-    //             method:"put",
-    //             headers: {
-    //                 "Content-type": "application/json",
-    //                 Authorization: "Bearer " + localStorage.getItem("jwt")
-
-    //               },
-    //               body:JSON.stringify({
-    //                 postId:id
-    //               })
-    //         }).then(res=>res.json())
-    //         .then((result)=>{
-    //             console.log(result);
-
-    //         })
-    //      }
-
+  const makeComment = (text, id) => {
+    fetch("http://localhost:5000/comment", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        text: text,
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((posts) => {
+          if (posts._id == result._id) {
+            return result;
+          } else {
+            return posts;
+          }
+        });
+        setdata(newData);
+        setcomment("");
+        notifyB("Comment posted");
+        console.log(result);
+      });
+  };
   
 
     return (
         <>
-            <div className="home px-3">
-                {/* card */}
-                {data.map(post => {
-
-                    return (
-                        <div className="container mx-auto" >
-                            <div className="card  border justify-center items-center py-7 max-w-lg mx-auto mt-5">
-                                <div className="card-header flex w-36 items-center">
-                                    <img src={homeimg} alt="img" className="w-10 h-10 rounded-full mx-auto" />
-                                    <h1 className="font-semibold">{post.postedBy?.name || "Unknown"}</h1>
-                                </div>
-                                <br />
-                                <div className="card-images">
-                                    <img src={post.photo} alt="" className="mx-auto w-full max-h-[700px] " />
-
-                                </div>
-
-                                <div className="card-content">
-                                    <span><GrFavorite className="text-xl mt-2 w-10" /></span>
-
-                                    <p className=" text-md mt-4 ms-2">1 like</p>
-                                    <p className=" text-md mt-1 ms-2">{post.body}</p>
-                                </div>
-                                <div className="card-comment flex mt-3 border space-x-2 p-2 rounded-md bg-white">
-                                    <span>
-                                        <FiSmile className="text-xl mt-1 w-6 text-gray-500" />
-                                    </span>
-                                    <input
-                                        type="text"
-                                        placeholder="Add a comment"
-                                        className="flex-grow border rounded-md px-2 py-1 focus:outline-none focus:ring focus:ring-blue-300"
-                                        value={comment}
-                                        onChange={(e) => setcomment(e.target.value)} // Use onChange
-                                    />
-                                    <button
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:ring focus:ring-blue-300"
-                                    >
-                                        Post
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )
-
-                })}
+           <div className="home px-3">
+      {data.map(post => (
+        <div key={post._id} className="container mx-auto mt-5"> 
+          <div className="card border py-7 max-w-lg mx-auto bg-white rounded-md shadow-md"> 
+            <div className="card-header flex items-center px-4">
+              <img src={homeimg} alt="User Avatar" className="w-10 h-10 rounded-full mr-3" />
+              <h1 className="font-semibold">{post.postedBy?.name || "Unknown"}</h1>
             </div>
+            <div className="card-images mt-4">
+              <img src={post.photo} alt="Post Image" className="mx-auto w-full max-h-[700px] object-cover" />
+            </div>
+            <div className="card-content px-4 py-2"> 
+              <div className="flex items-center mt-2"> 
+                  <GrFavorite className="text-xl mr-2 text-gray-600" /> 
+                  <p className="text-md">{post.likes?.length || 0} likes</p> 
+              </div>
+              <p className="text-md mt-2">{post.body}</p>
+            </div>
+            <div className="card-comment flex mt-3 border-t border-gray-200 pt-3 px-4 bg-white"> 
+              <FiSmile className="text-xl mt-1 w-6 text-gray-500 mr-2" /> 
+              <input
+                type="text"
+                placeholder="Add a comment"
+                className="flex-grow border rounded-md px-2 py-1 focus:outline-none focus:ring focus:ring-blue-300"
+                value={comment}
+                onChange={(e) => setcomment(e.target.value)}
+              />
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded ml-2 focus:outline-none focus:ring focus:ring-blue-300"
+                onClick={() => {
+                  makeComment(comment, post._id);
+                  setcomment(''); 
+                }}
+              >
+                Post
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
         </>
     )
 }

@@ -30,41 +30,61 @@ router.post("/Createpost", RequireLogin, (req, res) => {
     }).catch(err => console.log(err))
 })
 
-router.get("/myposts",RequireLogin,(req,res)=>{
-    POST.find({postedBy:req.user_id})
-    .populate("postedBy","_id name")
-    .then(myposts=>{
-        res.json(myposts)
-    })
+router.get("/myposts", RequireLogin, (req, res) => {
+    POST.find({ postedBy: req.user_id })
+        .populate("postedBy", "_id name")
+        .then(myposts => {
+            res.json(myposts)
+        })
 })
 
-router.put("/likes",RequireLogin,(req,res)=>{
-    POST.findByIdAndUpdate(req.body.postId,{
-        $push:{likes:req.user._id}
-    },{
-        new:true
-    }).exec((err ,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
+router.put("/likes", RequireLogin, (req, res) => {
+    POST.findByIdAndUpdate(req.body.postId, {
+        $push: { likes: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
             res.json(result)
         }
     })
 })
 
-router.put("/unlike",RequireLogin,(req,res)=>{
-    POST.findByIdAndUpdate(req.body.postId,{
-        $pull:{likes:req.user._id}
-    },{
-        new:true
-    }).exec((err ,result)=>{
-        if(err){
-            return res . status(422).json({error:err})
-        }else{
+router.put("/unlike", RequireLogin, (req, res) => {
+    POST.findByIdAndUpdate(req.body.postId, {
+        $pull: { likes: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
             res.json(result)
         }
     })
 })
 
+router.put('/comment', RequireLogin, async (req, res) => {
+    const comment = {
+        text: req.body.text,
+        postedBy: req.user._id,
+    };
 
-module.exports=router
+    try {
+        const result = await POST.findByIdAndUpdate(req.body.postId, { $push: { comments: comment } }, { new: true })
+            .populate("postedBy", "_id name")
+            .populate("comments.postedBy", "_id name");
+
+        if (!result) {
+            return res.status(404).json({ error: "Post not found" });
+        }
+
+        res.json(result);
+    } catch (err) {
+        console.error("Error updating comment:", err);
+        res.status(500).json({ error: "Failed to update comment" });
+    }
+});
+module.exports = router
