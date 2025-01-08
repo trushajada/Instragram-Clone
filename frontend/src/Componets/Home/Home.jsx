@@ -47,16 +47,16 @@ const Home = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        const newData = data.map((posts) => {
-          if (posts._id == result._id) {
-            return result;
-          } else {
-            return posts;
-          }
-        });
-        setdata(newData);
-        setcomment("");
-        notifyB("Comment posted");
+        // const newData = data.map((posts) => {
+        //   if (posts._id == result._id) {
+        //     return result;
+        //   } else {
+        //     return posts;
+        //   }
+        // });
+        // setdata(newData);
+        // setcomment("");
+        // notifyB("Comment posted");
         console.log(result);
       });
   };

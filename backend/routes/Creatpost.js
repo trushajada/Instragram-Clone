@@ -73,7 +73,11 @@ router.put('/comment', RequireLogin, async (req, res) => {
     };
 
     try {
-        const result = await POST.findByIdAndUpdate(req.body.postId, { $push: { comments: comment } }, { new: true })
+        const result = await POST.findByIdAndUpdate(
+            req.body.postId,
+            { $push: { comments: comment } },
+            { new: true }
+        )
             .populate("postedBy", "_id name")
             .populate("comments.postedBy", "_id name");
 
